@@ -1,0 +1,12 @@
+﻿@model JobOffers.Models.Job
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<lable>Job Title</lable> @Model.JobTitle
+<br />
+<lable>Job Content</lable> @Model.JobContent
+<br />
+@Html.ActionLink("Back To Index", "Index")

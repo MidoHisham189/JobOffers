@@ -1,0 +1,61 @@
+﻿@model JobOffers.ViewModel.RoleViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Roles</h2>
+
+@Html.ActionLink("Add New Role", "AddNewRole", new { @rolevm = Model }, new { @class = "btn btn-primary" })
+<hr />
+<div id="message">
+
+</div>
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <td>Role Name</td>
+            <td></td>
+            <td></td>
+        </tr>
+        
+    </thead>
+
+    <tbody>
+        @foreach(var roles  in Model.roles){
+            <tr>
+                <td>@roles.Name</td>
+                <td>@Html.ActionLink("Edit", "Edit", new {id = roles.Id })</td>
+                <td><button class="btn btn-link jsdelete" role-id=@roles.Id>Delete</button> </td>
+            </tr>
+        }
+
+    </tbody>
+
+
+</table>
+
+
+@section scripts {
+
+   <script>
+       $('.jsdelete').click(function () {
+           var btnDelete = $(this);
+           if (confirm("Are You Sure You Want Delete This Role")) {
+               $.ajax({
+                   type: 'Post',
+                   url: '/Roles/Delete',
+                   data: {
+                       Id:btnDelete.attr('role-id')
+                   },
+                   success: function (data) {
+                       $('#message').append('<p>' + data + '</p>').fadeIn("Slow");
+                       btnDelete.parents("tr").remove().fadeOut("Slow");
+                   }
+               })
+
+              
+           }
+
+       });
+    </script>
+}

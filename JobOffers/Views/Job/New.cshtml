@@ -1,0 +1,30 @@
+﻿@model JobOffers.ViewModel.JobViewModel
+@{
+    ViewBag.Title = "New";
+}
+
+<h2>New</h2>
+
+@using (Html.BeginForm("Save","Job"))
+{
+    <div class="form-group">
+        @Html.LabelFor(m=> m.job.JobTitle)
+        @Html.TextBoxFor(m => m.job.JobTitle, new  {@class="form-control" })
+
+    </div>
+    
+    <div class="form-group">
+        @Html.LabelFor(m=> m.job.JobContent)
+        @Html.TextBoxFor(m => m.job.JobContent, new {@class="form-control" })
+    </div>
+    
+    <div class="form-group">
+        @Html.DropDownListFor(m => m.job.CategoryId, new SelectList(Model.Categories, "CategoryId", "CategoryName"), "Add Job Category", new { @class = "form-control" })
+    </div>
+    
+    <div class="form-group">
+        @Html.HiddenFor(m=> m.job.JobId)
+        <button class="btn btn-primary">Save</button>
+    </div>
+}
+

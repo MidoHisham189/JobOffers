@@ -1,0 +1,66 @@
+﻿@model IEnumerable<JobOffers.Models.Job>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+@Html.ActionLink("Add New", "New");
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <td> Category</td>
+            <td>Job Name </td>
+            <td> Job Content</td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var job in Model)
+        {
+            <tr>
+                <td>@job.Category.CategoryName</td>
+                <td>@job.JobTitle</td>
+                <td>@job.JobContent</td>
+                <td>@Html.ActionLink("Details","Details",new{id = job.JobId})</td>
+                <td>@Html.ActionLink("Edit", "Edit", new {id = job.JobId })</td>
+                <td><button class="btn btn-link jsdelete" job-id=@job.JobId >Delete</button> </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+
+@section scripts{
+
+   <script>
+       $(document).ready(function () {
+
+           $('.jsdelete').click(function () {
+
+               var button = $(this);
+               if (confirm("Are you sure you want delete this job")) {
+                   $.ajax({
+                       type: 'Post',
+                       url: '@Url.Action("Delete","Job")',
+                       data: {
+
+                           id: button.attr('job-id')
+                       },
+                       success: function (data) {
+
+                           button.parents('tr').remove().fadeOut("slow");
+                       }
+
+                   });
+
+               }
+             
+
+           });
+       });
+    </script>
+}

@@ -1,0 +1,16 @@
+﻿@model JobOffers.Models.Job
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<label>Job Name:</label> @Model.JobTitle
+<br />
+<label>Job Content :</label> @Model.JobContent
+<br />
+
+@Html.ActionLink("Apply For This Job", "Apply", new { id = Model.JobId }, new {@class="btn btn-primary" });
+@*<button class="btn btn-primary jsapply" job-id=@Model.JobId >Apply For This Job</button>*@
+
+

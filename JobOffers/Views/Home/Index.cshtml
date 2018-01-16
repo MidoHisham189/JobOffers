@@ -1,0 +1,40 @@
+﻿@model IEnumerable<JobOffers.Models.Category>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+
+<div class="jumbotron">
+    <h1>Your Job</h1>
+ 
+</div>
+
+
+@foreach (var cat in Model)
+{
+    <h4>@cat.CategoryName</h4>
+
+
+    <table class="table table-hover table-bordered">
+        <thead>
+            <tr>
+                <td> job Name</td>
+                <td>job Content</td>
+                <td> job Category</td>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var job in cat.jobs)
+            {
+                <tr>
+                    <td>@job.JobTitle</td>
+                    <td>@job.JobContent</td>
+                    <td>@Html.ActionLink("Job Detail", "Details", new { id = job.JobId }, new { @class = "btn btn-primary" })</td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}

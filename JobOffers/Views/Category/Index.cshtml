@@ -1,0 +1,63 @@
+﻿@model IEnumerable<JobOffers.Models.Category>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+@Html.ActionLink("Add New Category", "New", null, new {@class="btn btn-primary"})
+
+<br />
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <td>Category Name</td>
+            <td> Category Description</td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var cat in Model)
+        {
+            <tr>
+                <td>@cat.CategoryName</td>
+                <td>@cat.CategoryDescription</td>
+                <td>@Html.ActionLink("Details","Details",new{Id = cat.CategoryId})</td>
+                <td>@Html.ActionLink("Edit","Edit",new{Id = cat.CategoryId})</td>
+                <td><button class="btn btn-link jsdelete" cat-id=@cat.CategoryId> Delete </button></td>
+            </tr>
+            
+            
+        }
+    </tbody>
+
+</table>
+
+@section scripts{
+
+    <script>
+        $(document).ready(function () {
+
+            
+            $('.jsdelete').click(function () {
+                var button = $(this);
+
+                if (confirm("Are you Sure you Want Delete this Category")) {
+                    $.ajax({
+                        type: 'Post',
+                        url: '/Category/Delete',
+                        data: {
+                            Id: button.attr('cat-id')
+                        },
+                        success: function (data) {
+                            button.parents("tr").remove().fadeOut("Slow");
+                        }
+                    });
+                }
+               
+            });
+        });
+    </script>
+}

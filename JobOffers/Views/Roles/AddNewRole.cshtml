@@ -1,0 +1,31 @@
+﻿@model JobOffers.ViewModel.RoleViewModel
+@{
+    ViewBag.Title = "AddNewRole";
+}
+
+@if (Model == null || Model.Id == null)
+{
+    <h2>Add New Role</h2>
+}
+else
+{
+    <h2>Edit</h2>
+}
+
+
+
+@using(Html.BeginForm("Save","Roles")){
+
+    <div class="form-group">
+        @Html.LabelFor(r => r.Name)
+        @Html.TextBoxFor(r => r.Name, new {@class="form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.HiddenFor(m=> m.Id)
+        @Html.AntiForgeryToken()
+        <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+
+    
+}

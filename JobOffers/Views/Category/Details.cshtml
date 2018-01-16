@@ -1,0 +1,12 @@
+﻿@model JobOffers.Models.Category
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<label>Category Name:</label> @Model.CategoryName
+
+<label>Category Description :</label> @Model.CategoryDescription
+
+@Html.ActionLink("Back To Index", "Index");

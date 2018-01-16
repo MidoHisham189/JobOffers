@@ -1,0 +1,38 @@
+﻿@model IEnumerable<JobOffers.ViewModel.JobsViewModel>
+@{
+    ViewBag.Title = "GetUserAppliesTOjob";
+}
+
+<h2>GetUserAppliesTOjob</h2>
+
+@foreach (var job in Model)
+{
+   <h3> @job.JobTitle </h3> 
+    
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <td>UserName</td>
+                    <td>Message</td>
+                    <td>Date</td>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var jobs in job.Items)
+                {
+                    <tr>
+                        <td>@jobs.User.UserName</td>
+                        <td>@jobs.Message</td>
+                        <td>@jobs.ApplyDate</td>
+                    </tr>
+                }
+                
+            </tbody>
+
+        </table>
+
+        <br />
+    
+
+}

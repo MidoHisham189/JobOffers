@@ -1,0 +1,51 @@
+﻿@model IEnumerable<JobOffers.ViewModel.UserViewModel>
+@using JobOffers.Models;
+@{
+    ViewBag.Title = "UsersRoles";
+    ApplicationDbContext db = new ApplicationDbContext();
+}
+
+
+<h2>UsersRoles</h2>
+
+@*@foreach (var item in Model)
+    {
+        <h5>@item.UserName</h5>
+
+        <table class="table table-hover table-bordered">
+            <thead>
+                <tr>
+                    <td>
+                        Role Name
+                    </td>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var role in item.Roles)
+                {
+                    <tr>
+                        <td>
+                           @db.Roles.SingleOrDefault(r => r.Id == role.RoleId).Name
+                        </td>
+                   </tr>
+
+                 }
+
+            </tbody>
+        </table>
+
+    }*@
+
+
+<div class="row">
+    <h4>User</h4>
+    @foreach (var user in Model)
+    {
+        <p>
+            <strong>
+                @user.UserName | @user.Email | @user.Role
+            </strong>
+        </p>
+    }
+</div>
